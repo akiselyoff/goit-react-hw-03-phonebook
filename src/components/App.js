@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
+
 import s from './containerApp.module.css';
 
 class App extends Component {
   state = {
-    contacts: [
-      // { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      // { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      // { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      // { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: [],
     filter: '',
   };
 
@@ -26,7 +24,6 @@ class App extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.contacts !== this.state.contacts) {
-      console.log('contacts was update');
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
@@ -52,13 +49,19 @@ class App extends Component {
       );
 
       if (isContact) {
-        alert(`${name} is already in contact`);
+        toast.warn(`${name} is already in contact`, {
+          theme: 'colored',
+          autoClose: 4000,
+          pauseOnHover: true,
+          closeOnClick: true,
+        });
+
         return contacts;
       } else {
         return {
           contacts: [
             {
-              id: nanoid(),
+              id: nanoid(5),
               name,
               number,
             },
@@ -94,6 +97,17 @@ class App extends Component {
           <ContactList
             filteredContacts={this.filteredContacts()}
             onDelete={this.contactDelete}
+          />
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
           />
         </div>
       </div>
