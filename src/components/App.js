@@ -35,12 +35,14 @@ class App extends Component {
   };
 
   filteredContacts = () => {
-    const filterNormalize = this.state.filter.toLowerCase();
-    return this.state.contacts
-      .filter(contact => {
-        return contact.name.toLowerCase().includes(filterNormalize);
-      })
-      .sort((a, b) => a.name.localeCompare(b.name));
+    if (this.state.filter) {
+      const filterNormalize = this.state.filter.toLowerCase();
+      return this.state.contacts
+        .filter(contact => {
+          return contact.name.toLowerCase().includes(filterNormalize);
+        })
+        .sort((a, b) => a.name.localeCompare(b.name));
+    }
   };
 
   formSubmit = ({ name, number }) => {

@@ -5,15 +5,16 @@ import s from './ContactList.module.css';
 const ContactList = ({ filteredContacts, onDelete }) => {
   return (
     <ul className={s.contactList}>
-      {filteredContacts.map(({ id, name, number }) => {
-        return (
-          <ContactItem
-            contact={{ id, name, number }}
-            key={id}
-            onDelete={onDelete}
-          />
-        );
-      })}
+      {filteredContacts &&
+        filteredContacts.map(({ id, name, number }) => {
+          return (
+            <ContactItem
+              contact={{ id, name, number }}
+              key={id}
+              onDelete={onDelete}
+            />
+          );
+        })}
     </ul>
   );
 };
