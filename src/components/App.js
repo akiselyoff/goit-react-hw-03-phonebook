@@ -19,9 +19,10 @@ class App extends Component {
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
-    console.log(parsedContacts);
 
-    this.setState({ contacts: parsedContacts });
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.contacts !== this.state.contacts) {
@@ -35,14 +36,12 @@ class App extends Component {
   };
 
   filteredContacts = () => {
-    if (this.state.filter) {
-      const filterNormalize = this.state.filter.toLowerCase();
-      return this.state.contacts
-        .filter(contact => {
-          return contact.name.toLowerCase().includes(filterNormalize);
-        })
-        .sort((a, b) => a.name.localeCompare(b.name));
-    }
+    const filterNormalize = this.state.filter.toLowerCase();
+    return this.state.contacts
+      .filter(contact => {
+        return contact.name.toLowerCase().includes(filterNormalize);
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
   };
 
   formSubmit = ({ name, number }) => {
