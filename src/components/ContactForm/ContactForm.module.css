@@ -1,0 +1,17 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.form__label {
+    display: flex;
+        flex-direction: column;
+        margin: 10px;
+}
+
+.submitBtn {
+    border-radius: 5px;
+    align-self: center;
+}

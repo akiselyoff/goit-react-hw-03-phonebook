@@ -1,0 +1,4 @@
+.filterLabel {
+    display: flex;
+    flex-direction: column;
+}
